@@ -1,0 +1,74 @@
+﻿@model Apresentacao.Servicos.Dto.DtoPesquisaEmpresa
+
+@{
+    ViewBag.Title = "Empresas";
+    Layout = "../Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="page-header">
+        <h1>Cadastro Empresa</h1>
+    </div>
+
+    <form>
+        <div class="clearfix">
+            <h1>Lista de Empresas</h1>
+            
+            <div class="clearfix">
+                <div class="input-group">
+                    <span class="input-group-addon input-sm">Pesquisar: </span>
+                    <input type="text" class="form-control input-sm" id="pesquisar-nome" placeholder="">
+                </div>
+            </div>
+            <div class="row-fluid">
+                <input value="Pesquisar" class="btn btn-primary btn-small pull-right pesquisar-empresa">
+            </div>
+
+            <table class="table empresas">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Nome</th>
+                        <th>Nome Fantasia</th>
+                        <th>WebSite</th>
+                        <th>CNPJ</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        @foreach(var item in Model.Pesquisa)
+                        {
+                            <td>@item.IdEmpresa</td>
+                            <td>@item.Nome</td>
+                            <td>@item.NomeFantasia</td>
+                            <td>@item.WebSite</td>
+                            <td>@item.Cnpj</td>
+                            <td><a href="@Url.Action("Cadastrar", "Empresa", new { idEmpresa = item.IdEmpresa })">Alterar</a></td>
+                            <td><a href="#">Contatos</a></td>
+                        }
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div>
+            <ul class="pagination">
+                <li><a href='#'>«</a></li>
+                @for (int i = 1; i <= Model.TotalPagina; i++)
+                {
+                    var classAction = "";
+                    if(i == Model.PaginaSelecionada)
+                    {
+                        classAction = "active";
+                    }
+                    <li rel="" class=""><a></a></li>    
+                }
+                <li><a href='#'>»</a></li>
+            </ul>
+        </div>
+
+    </form>
+    <br class="clearfix" />
+</div>
+

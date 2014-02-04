@@ -1,0 +1,123 @@
+﻿@model Apresentacao.Servicos.Dto.DtoEmpresa
+
+@{
+    ViewBag.Title = "Cadastrar Contatos";
+    Layout = "../Shared/_Layout.cshtml";
+}
+
+@section head
+{
+    <script type="text/javascript" src="@Url.Content("~/Scripts/Contato/contato-cadastro.js")"></script>
+    
+    <script id="contato-pesquisa-template" type="text/x-jsrender">
+        <tr rel="{{:IdContato}}">
+            <td class="id-contato">{{:IdContato}}</td>
+            <td class="nome">{{:Nome}}</td>
+            <td class="email">{{:Email}}</td>
+            <td class="telefone">{{:Telefone}}</td>
+            <td class="celular">{{:Celular}}</td>
+            <td ><a href="#" class="alterar">Alterar</a></td>
+        </tr>
+    </script>
+    
+    <script id="contato-pesquisa-sem-registro-template" type="text/x-jsrender">
+        <tr rel="">
+            <td>{{:Nome}}</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </script>
+    
+    <script id="paginacao-template" type="text/x-jsrender">
+        <li rel={{:pagina}} class="paginas {{:className}}"><a>{{:pagina}}</a></li>
+    </script>
+}
+
+<div class="container">
+    <div class="page-header">
+        <h1>Cadastro Contato - Empresa: @(Model.Nome) </h1>
+    </div>
+
+    <form>
+        <input type="hidden" value="@Model.IdEmpresa" id="id-empresa" />
+        <input type="hidden" value="0" id="id-contato" />
+
+        <div class="clearfix  ">
+            <div class="input-group">
+                <span class="input-group-addon input-sm">Nome: </span>
+                <input type="text" class="form-control input-sm" id="nome" placeholder="">
+            </div>
+            <div class="alert error nome"></div>
+        </div>
+        
+        <div class="clearfix  ">
+            <div class="input-group">
+                <span class="input-group-addon input-sm">Email: </span>
+                <input type="text" class="form-control input-sm" id="email" placeholder="">
+            </div>
+            <div class="alert error email"></div>
+        </div>
+        
+        <div class="clearfix  ">
+            <div class="input-group">
+                <span class="input-group-addon input-sm">Telefone: </span>
+                <input type="text" class="form-control input-sm" id="telefone" placeholder="">
+            </div>
+            <div class="alert error telefone"></div>
+        </div>
+                
+        <div class="clearfix">
+            <div class="input-group">
+                <span class="input-group-addon input-sm">Celular: </span>
+                <input type="text" class="form-control input-sm" id="celular" placeholder="">
+            </div>
+            <div class="alert error celular"></div>
+        </div>
+        
+        <div class="row-fluid">
+            <div class="span12">
+                <input value="Salvar" class="btn btn-primary btn-small pull-right salvar-cadastro">
+            </div>
+        </div>
+        
+        <div class="clearfix lista-contato">
+            <h1>Lista de Contatos</h1>
+            
+            <div class="clearfix">
+                <div class="input-group">
+                    <span class="input-group-addon input-sm">Pesquisar: </span>
+                    <input type="text" class="form-control input-sm" id="pesquisar-nome" placeholder="Por nome">
+                </div>
+            </div>
+
+            <div class="row-fluid">
+                <input value="Pesquisar" class="btn btn-primary btn-small pull-right pesquisar-contatos">
+            </div>
+
+            <table class="table contatos">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Nome</th>
+                        <th>Email</th>
+                        <th>Telefone</th>
+                        <th>Celular</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+        
+        <div>
+            <ul class="pagination">            
+            </ul>
+        </div>
+
+    </form>
+    <br class="clearfix" />
+</div>
